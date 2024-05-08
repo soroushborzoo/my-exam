@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Exam Viewer</title>
+<style>
+    .exam-container {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .question {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="exam-container">
+    <button onclick="showExams()">Show My Exams!</button>
+    <div id="exams"></div>
+    <input type="text" id="questionInput" placeholder="Chat with Exam AI...">
+</div>
+<script>
+    function showExams() {
+        const exams = [
+            { exam: 'math', day: 'Wednesday', lesson: '1-4' },
+            { exam: 'science', day: 'saturday', lesson: '7+' },
+            { exam: 'nothing', day: 'nothing', lesson: 'nothing' }
+        ];
+
+        const examsDiv = document.getElementById('exams');
+        examsDiv.innerHTML = '';
+        
+        exams.forEach(exam => {
+            const examInfo = document.createElement('div');
+            examInfo.innerHTML = `<span class="question">Exam:</span> ${exam.exam}, <span class="question">Day:</span> ${exam.day}, <span class="question">Lesson:</span> ${exam.lesson}`;
+            examsDiv.appendChild(examInfo);
+        });
+    }
+
+    document.getElementById('questionInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const question = e.target.value.toLowerCase();
+            let answer = 'I am sorry, I do not have that information.';
+            if (question.includes('math')) {
+                answer = 'The Math exam is on wedensday.';
+            } else if (question.includes('science')) {
+                answer = 'The science exam is on saturday.';
+            } else if (question.includes('nothing')) {
+                answer = 'I am sorry, I do not have that information.';
+            }
+            alert(answer);
+        }
+    });
+</script>
+</body>
+</html>
